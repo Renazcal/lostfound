@@ -1,9 +1,11 @@
 const express= require("express");
 
 const app=express();
-const port=3000;
+const port=3001;
 
 app.use(express.json());
+// serve the website (index.html, styles.css, script.js)
+app.use(express.static(__dirname));
 let items =[];
 // get all lost items
 app.get("/api/items", (req,res)=> {
@@ -19,11 +21,11 @@ app.post("/api/items", (req, res) => {
         feature: req.body.feature
     };
     items.push(newItem);
-    res.statues(201).json(newItem);
+    res.status(201).json(newItem);
     
 });
 
 app.listen(port, () => {
-    console.log('backend running at http://localhost:${PORT}');
+    console.log(`backend running at http://localhost:${port}`);
 
 });
